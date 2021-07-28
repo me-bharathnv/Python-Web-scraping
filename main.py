@@ -31,16 +31,23 @@ class Amazon_price_trackerApp(MDApp):
         return screen
 
 
-    def show_data(self, obj):
+     def show_data(self, obj):
         close_buttons = MDFlatButton(text="Close", on_release=self.close_dialog)
         more_buttons = MDFlatButton(text="More")
         url = self.username.text
-        page = requests.get(url, headers=headers)
-        soup = BeautifulSoup(page.content, "html.parser")
-        price = soup.find(id="priceblock_dealprice")
-        if price == None:
-            price = soup.find(id="priceblock_ourprice")
-        final_price = price.getText()
+        if "amazon.in" in url:
+            page = requests.get(url, headers=headers)
+            soup = BeautifulSoup(page.content, "html.parser")
+            price = soup.find(id="priceblock_dealprice")
+            if price == None:
+                price = soup.find(id="priceblock_ourprice")
+            final_price = price.getText()
+        elif "flipkart.com" in url:
+            page = requests.get(url, headers=headers)
+            soup = BeautifulSoup(page.content, "html.parser")
+            price = soup.find("div", {"class", "_30jeq3 _16Jk6d"})
+            final_price = price.getText()
+
         self.dialog = MDDialog(title="Product price", text=final_price,
                                size_hint=(0.5, 1),
                                buttons=[close_buttons, more_buttons])
@@ -50,7 +57,7 @@ class Amazon_price_trackerApp(MDApp):
         self.dialog.dismiss()
 
 
-Amazon_price_trackerApp().run()
+Amazon_flipkart_price_track().run()
 
 
 
