@@ -8,7 +8,7 @@ from kivymd.uix.dialog import MDDialog
 
 username_helper = """
 MDTextField :
-    hint_text: "Enter product url"
+    hint_text: "Enter amazon/flipkart product url"
     pos_hint: {"center_x" : 0.5, "center_y" : 0.8}
     size_hint_x:None
     width : 300 
