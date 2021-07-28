@@ -19,7 +19,7 @@ headers = {
 }
 
 
-class Amazon_price_trackerApp(MDApp):
+class Amazon_flipkart_price_track(MDApp):
 
     def build(self):
         screen = Screen()
